@@ -1,23 +1,34 @@
 function threeSum(arr, target) {
-    Arrays.sort(arr);
-    let res = arr[0] + arr[1] + arr[2];
-	for (let i = 0; i < arr.length - 2; i++) {
-	let left = i + 1;
-	let right = arr.length - 1;
-	while (left < right) {
-		let Closestsum = arr[i] + arr[left] + arr[right];
-		if (Math.abs(Closestsum - target) < Math.abs(res - target)) {
-			res = Closestsum;
-		}
-		if (Closestsum < target) {
-			left++;
-		} else if (Closestsum > target) {
-			right--;
-		} else {
-			return res;
-		}
+// write your code here
+	arr.sort();
+	let diff = Number.MAX_VALUE;
+	let ans = 0;
+
+	for(let i=0; i<arr.length; i++) {
+		let first = i;
+		let left = i+1;
+		let right = arr.length-1;
+		 while (left < right) {
+		 	let sum = arr[first] + arr[left] + arr[right];
+
+			 if (sum == target) {
+			 	return target;
+			 } else if (Math.abs(sum-target) < diff) {
+				diff = Math.abs(sum-target);
+				ans = sum;
+			 }
+
+			 if(sum < target) {
+				 left++;
+			 } else if (sum > target) {
+			 	right--;
+			 } else {
+				 break;
+			 }
+		 }
 	}
+	 return ans;
+  
 }
-return res;
-}
+
 module.exports = threeSum;
